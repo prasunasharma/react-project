@@ -3,24 +3,23 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
-
+      nodejs: 12
+   
     commands:
-      # install yarn
-      - npm install 
-      # install dependencies
-  
-      # so that build commands work
-      - npm add eslint-config-react-app
-
+        # install npm
+        - npm install
+       
   build:
     commands:
-      # run build script
-      - npm build
-
+        # run build script
+        - npm run-script build
+     
 artifacts:
   # include all files required to run application
-  # we include only the static build files
+  # notably excluded is node_modules, as this will cause overwrite error on deploy
   files:
-    - '**/*'
-  base-directory: 'build'
+    - public/**/*
+    - src/**/*
+    - package.json
+    - appspec.yml
+    - scripts/**/*
